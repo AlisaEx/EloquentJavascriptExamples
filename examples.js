@@ -57,3 +57,11 @@ function absolute(num){
     return num;
   }
 };
+
+// Example 3.2
+function greaterThan(x){
+	return function(y){
+		return x < y;
+	};
+};
+
