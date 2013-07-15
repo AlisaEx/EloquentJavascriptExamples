@@ -478,3 +478,6 @@ LichenEaterEater.prototype.act = function(surroundings) {
 };
 LichenEaterEater.prototype.character = "@";
 creatureTypes.register(LichenEaterEater);
+
+// Example 10.1
+var dateRegExpr = /\d\d\/\d\d\/\d\d\d\d/;
