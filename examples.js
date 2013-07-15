@@ -330,6 +330,151 @@ Point.prototype.isEqualTo = function(other) {
 };
 
 // Example 8.2
-Grid.prototype.each = function(){
-	
+Grid.prototype.each = function(action){
+	for (var y = 0; y < this.height; y++) {
+    	for (var x = 0; x < this.width; x++) {
+      		var point = new Point(x, y);
+      		action(point, this.valueAt(point));
+    	}
+  	}
+};
+
+// Example 8.3
+Terrarium.prototype.toString = function(){
+	var characters = [];
+	var endOfLine = this.grid.width - 1;
+	this.grid.each(function(point, value) {
+		characters.push(characterFromElement(value));
+		if (point.x == endOfLine){
+			characters.push("\n");
+		}
+	});
+	return characters.join("");
+};
+
+// Example 8.4
+function method(obj, name){
+	return fucntion(){
+		obj[name].apply(obj, arguments);
+	}
 }
+
+// Example 8.5
+Terrarium.prototype.listSurroundings = function(point){
+	var result = {};
+	var grid = this.grid;
+	directions.each(function(name, direction) {
+		var place = center.add(direction);
+		if (grid.isInside(place)){
+			  result[name] = characterFromElement(grid.valueAt(place));
+		}
+		else{
+			  result[name] = "#";
+		}
+	});
+	return result;
+}
+
+// Example 8.6
+Dictionary.prototype.name = function(){
+	var names = [];
+	this.each(function(name, value){
+		names.push(name);
+	});
+	return names;
+};
+function randomElement(array){
+	if(array.length>0){
+		return array[Math.floor(Math.random()*array.length)];
+	}
+	else{
+		print "The array is empty.";
+	}
+
+};
+function DrunkBug() {};
+DrunkBug.prototype.act = function(surroundings) {
+	return {type: "move",
+			direction: randomElement(Dictionary.names())
+	};
+};
+DrunkBug.prototype.character = "~";
+creatureTypes.register(DrunkBug);
+
+// Example 8.7
+function LichenEater() {
+  	this.energy = 10;
+}
+LichenEater.prototype.act = function(surroundings) {
+  	var emptySpace = findDirections(surroundings, " ");
+  	var lichen = findDirections(surroundings, "*");
+  	if (this.energy >= 30 && emptySpace.length > 0){
+   		return {type: "reproduce", direction: randomElement(emptySpace)};
+  	}
+  	else if (lichen.length > 0){
+    	return {type: "eat", direction: randomElement(lichen)};
+  	}
+  	else if (emptySpace.length > 0){
+    	return {type: "move", direction: randomElement(emptySpace)};
+  	}
+  	else{
+    	return {type: "wait"};
+	}
+};
+LichenEater.prototype.character = "c";
+creatureTypes.register(LichenEater);
+
+
+// Example 8.8
+function CleverLichenEater() {
+  	this.energy = 10;
+}
+CleverLichenEater.prototype.act = function(surroundings) {
+  	var emptySpace = findDirections(surroundings, " ");
+  	var lichen = findDirections(surroundings, "*");
+  	if (this.energy >= 30 && emptySpace.length > 0){
+   		return {type: "reproduce", direction: randomElement(emptySpace)};
+  	}
+  	else if (lichen.length > 1){
+    	return {type: "eat", direction: randomElement(lichen)};
+  	}
+  	else if (emptySpace.length > 0){
+    	return {type: "move", direction: randomElement(emptySpace)};
+  	}
+  	else{
+    	return {type: "wait"};
+	}
+};
+CleverLichenEater.prototype.character = "c";
+
+creatureTypes.register(CleverLichenEater);
+
+// Example 8.9
+function LichenEaterEater() {
+  this.energy = 30;
+  this.direction = "sw";
+}
+LichenEaterEater.prototype.act = function(surroundings) {
+  var emptySpace = findDirections(surroundings, " ");
+  var LichenEater = findDirections(surroundings, "c");
+
+  if (this.energy >= 50 && emptySpace.length > 0) {
+    return {type: "reproduce",
+            direction: randomElement(emptySpace)};
+  }
+  else if (LichenEater.length > 0) {
+    return {type: "eat",
+            direction: randomElement(LichenEater)};
+  }
+  else if (emptySpace.length > 0) {
+    if (surroundings[this.direction] != " ")
+      this.direction = randomElement(emptySpace);
+    return {type: "move",
+            direction: this.direction};
+  }
+  else {
+    return {type: "wait"};
+  }
+};
+LichenEaterEater.prototype.character = "@";
+creatureTypes.register(LichenEaterEater);
