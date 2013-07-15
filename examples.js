@@ -238,3 +238,98 @@ function splitParagraph(text) {
 function createImage(location){
 	return tag("img", [], {src: location});
 }
+
+// Example 7.1
+function makeRoads(start) {
+  for (var i = 1; i < arguments.length; i += 2)
+    makeRoad(start, arguments[i], arguments[i + 1]);
+}
+// Example 7.2
+function filter(func, array){
+	result = [];
+	for(i=0; i<array.length; i++){
+		if(func(array[i])===true){
+			result.push(array[i]);
+		}
+	}
+	return result;
+}
+
+// Example 7.3
+function shortestRoute(start, end){
+	var shortest = null;
+	forEach(possibleRoutes(start, end), function(route){
+		if (!shortest || shortest.length > route.length){
+			shortest = route;
+		}
+	});
+	return shortest;
+}
+
+// Example 7.4
+function possibleDirections(from) {
+  var mapSize = 20;
+  function insideMap(point) {
+    return point.x >= 0 && point.x < mapSize &&
+           point.y >= 0 && point.y < mapSize;
+  }
+
+  var directions = [point(-1, 0), point(1, 0), point(0, -1),
+                    point(0, 1), point(-1, -1), point(-1, 1),
+                    point(1, 1), point(1, -1)];
+  return filter(insideMap, map(partial(addPoints, from),
+                               directions));
+}
+
+// Example 7.5
+function estimatedDistance(PointA, PointB){
+	var dx = Math.abs(pointA.x - pointB.x),
+    var dy = Math.abs(pointA.y - pointB.y);
+	if (dx > dy){
+    	return (dx - dy) * 100 + dy * 141;  	
+  	}
+	else{
+    	return (dy - dx) * 100 + dx * 141;
+	}
+}
+
+// Example 7.6
+function makeReachedList() {
+  return {};
+}
+
+function storeReached(list, point, route) {
+  var inner = list[point.x];
+  if (inner == undefined) {
+    inner = {};
+    list[point.x] = inner;
+  }
+  inner[point.y] = route;
+}
+
+function findReached(list, point) {
+  	var inner = list[point.x];
+  	if (inner == undefined){
+    	return undefined;
+	}
+  	else{
+    	return inner[point.y];
+	}
+}
+
+// Example 8.1
+function Point(x, y) {
+  this.x = x;
+  this.y = y;
+}
+Point.prototype.add = function(other) {
+  return new Point(this.x + other.x, this.y + other.y);
+};
+Point.prototype.isEqualTo = function(other) {
+  return this.x == other.x && this.y == other.y;
+};
+
+// Example 8.2
+Grid.prototype.each = function(){
+	
+}
