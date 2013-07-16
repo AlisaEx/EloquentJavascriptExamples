@@ -526,3 +526,19 @@ function escapeHTML(text) {
     return replacements[character];
   });
 }
+
+	/// Example 11.1 ///
+function validInfo(form) {
+  return form.elements.name.value != "" &&
+    /^.+@.+\.\w{2,3}$/.test(form.elements.email.value);
+}
+
+	/// Example 11.2 ///
+userForm.elements.send.onclick = function() {
+	if (validInfo(userForm)){
+    	userForm.submit();
+    }
+  	else{
+    	alert("Enter your shit in right dog!");
+	}
+};
