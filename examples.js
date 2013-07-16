@@ -1,11 +1,11 @@
-// Example 2.2
+	/// Example 2.2 ///
 var result = 1;
 var index = 0;
 while (counter < 10) {
   result *= 2;
   index +=  1;
 }
-// Example 2.3
+	/// Example 2.3 ///
 var thing = "";
 var counter = 0;
 while (counter < 10) {
@@ -13,18 +13,18 @@ while (counter < 10) {
   print(thing);
   counter += 1;
 };
-// Example 2.4
+	/// Example 2.4 ///
 var index = 1;
 for (i=0;i<10;i++){
 	index *= 2;
 };
-// Example 2.5
+	/// Example 2.5 ///
 var thing = "#";
 for (var i = 0; i < 10; i++) {
 	print (thing);
 	thing += "#";
 };
-// Example 2.6
+	/// Example 2.6 ///
 var input = prompt("2+2=? SOLVE IT OR DIE");
 if (input === "4"){
 	alert("MATHEMATICAL!");
@@ -35,7 +35,7 @@ else if (input === "3" || input === "5"){
 else{
 	alert("NOPE!");
 }
-// Example 2.7
+	/// Example 2.7 ///
 var input = prompt("2+2=? SOLVE IT OR DIE");
 while (input !== "4"){
 	if(input === "3" || input ==="5"){
@@ -48,7 +48,7 @@ while (input !== "4"){
 }
 alert("SLAMACOW!")
 
-// Example 3.1
+	/// Example 3.1 ///
 function absolute(num){
   if (num<0){
     return -num;
@@ -58,20 +58,20 @@ function absolute(num){
   }
 };
 
-// Example 3.2
+	/// Example 3.2 ///
 function greaterThan(x){
 	return function(y){
 		return x < y;
 	};
 };
 
-// Example 4.1
+	/// Example 4.1 ///
 cats = {"Zooey": true};
 cats["Baby"] = true;
 detele cats["noneofmine"];
 show("Zooey" in cats);
 
-// Example 4.2
+	/// Example 4.2 ///
 function range(num){
 	var something = [];
 	for (i=0; i<=num; i++){
@@ -80,22 +80,22 @@ function range(num){
 	return something;
 }
 
-// Example 4.3
+	/// Example 4.3 ///
 thing = ["a","b","c d"];
 show(thing.join(" ").split(" "));
 
-// Example 4.4
+	/// Example 4.4 ///
 function startsWith(first, second){
 	return first.slice(0, second.length) === second;
 }
 
-// Example 4.5
+	/// Example 4.5 ///
 function catNames(p){
 	location = p.indexOf(":");
 	return p.slice(location+2).split(",");
 }
 
-// Example 4.6
+	/// Example 4.6 ///
 function extractDate(p){
 	function dateAt(start, end)
 		return Number(p.slice(start,start+end));
@@ -103,14 +103,14 @@ function extractDate(p){
 	return new Date(dateAt(11,4), dateAt(8,2)-1, dateAt(5,2));
 };
 
-// Example 4.7
+	/// Example 4.7 ///
 function between(p, start, end){
 	var startAt = p.indexOf(start)+start.length;
 	var endAt = p.indexOf(end,startAt);
 	return p.slice(startAt, endAt);
 }
 
-// Example 4.8
+	/// Example 4.8 ///
 function formatDate(date){
 	function addZero(number){
 		if (number < 10){
@@ -124,7 +124,7 @@ function formatDate(date){
          "/" + date.getFullYear());
 }
 
-// Example 4.9
+	/// Example 4.9 ///
 function oldestCat(obj){
 	var oldest = null;
 	for (name in obj){
@@ -141,7 +141,7 @@ function oldestCat(obj){
 	}
 }
 
-// Example 4.10
+	/// Example 4.10 ///
 function range(begin, stop){
 	var something = [];
 	if(arguments.length < 2){
@@ -154,7 +154,7 @@ function range(begin, stop){
 	return something;
 }
 
-// Example 4.11
+	/// Example 4.11 ///
 function sum(array){
 	result = 0;
 	for (i = 0; i < array.length; i++){
@@ -163,7 +163,7 @@ function sum(array){
 	return result;
 }
 
-// Example 6.1
+	/// Example 6.1 ///
 function countZeros(numbers){
 	function count(total, amount){
 		total + (amount===0 ? 1:0)
@@ -185,7 +185,7 @@ function countZeroes(array) {
   return count(array, equals(0));
 }
 
-// Example 6.2
+	/// Example 6.2 ///
 function processParagraph(p){
 	var header = 0;
 	while(p.charAt(0)===%){
@@ -195,7 +195,7 @@ function processParagraph(p){
 	return {type: (header===0 ? "p" : "h"+ header), content:p};
 }
 
-// Example 6.3  STILL NEED EXPLAINGING
+	/// Example 6.3 ///  STILL NEED EXPLAINGING
 function splitParagraph(text) {
   function indexOrEnd(character) {
     var index = text.indexOf(character);
@@ -234,17 +234,17 @@ function splitParagraph(text) {
   }
   return fragments;
 }
-// Example 6.4
+	/// Example 6.4 ///
 function createImage(location){
 	return tag("img", [], {src: location});
 }
 
-// Example 7.1
+	/// Example 7.1 ///
 function makeRoads(start) {
   for (var i = 1; i < arguments.length; i += 2)
     makeRoad(start, arguments[i], arguments[i + 1]);
 }
-// Example 7.2
+	/// Example 7.2 ///
 function filter(func, array){
 	result = [];
 	for(i=0; i<array.length; i++){
@@ -255,7 +255,7 @@ function filter(func, array){
 	return result;
 }
 
-// Example 7.3
+	/// Example 7.3 ///
 function shortestRoute(start, end){
 	var shortest = null;
 	forEach(possibleRoutes(start, end), function(route){
@@ -266,7 +266,7 @@ function shortestRoute(start, end){
 	return shortest;
 }
 
-// Example 7.4
+	/// Example 7.4 ///
 function possibleDirections(from) {
   var mapSize = 20;
   function insideMap(point) {
@@ -281,7 +281,7 @@ function possibleDirections(from) {
                                directions));
 }
 
-// Example 7.5
+	/// Example 7.5 ///
 function estimatedDistance(PointA, PointB){
 	var dx = Math.abs(pointA.x - pointB.x),
     var dy = Math.abs(pointA.y - pointB.y);
@@ -293,7 +293,7 @@ function estimatedDistance(PointA, PointB){
 	}
 }
 
-// Example 7.6
+	/// Example 7.6 ///
 function makeReachedList() {
   return {};
 }
@@ -317,7 +317,7 @@ function findReached(list, point) {
 	}
 }
 
-// Example 8.1
+	/// Example 8.1 ///
 function Point(x, y) {
   this.x = x;
   this.y = y;
@@ -329,7 +329,7 @@ Point.prototype.isEqualTo = function(other) {
   return this.x == other.x && this.y == other.y;
 };
 
-// Example 8.2
+	/// Example 8.2 ///
 Grid.prototype.each = function(action){
 	for (var y = 0; y < this.height; y++) {
     	for (var x = 0; x < this.width; x++) {
@@ -339,7 +339,7 @@ Grid.prototype.each = function(action){
   	}
 };
 
-// Example 8.3
+	/// Example 8.3 ///
 Terrarium.prototype.toString = function(){
 	var characters = [];
 	var endOfLine = this.grid.width - 1;
@@ -352,14 +352,14 @@ Terrarium.prototype.toString = function(){
 	return characters.join("");
 };
 
-// Example 8.4
+	/// Example 8.4 ///
 function method(obj, name){
 	return fucntion(){
 		obj[name].apply(obj, arguments);
 	}
 }
 
-// Example 8.5
+	/// Example 8.5 ///
 Terrarium.prototype.listSurroundings = function(point){
 	var result = {};
 	var grid = this.grid;
@@ -375,7 +375,7 @@ Terrarium.prototype.listSurroundings = function(point){
 	return result;
 }
 
-// Example 8.6
+	/// Example 8.6 ///
 Dictionary.prototype.name = function(){
 	var names = [];
 	this.each(function(name, value){
@@ -401,7 +401,7 @@ DrunkBug.prototype.act = function(surroundings) {
 DrunkBug.prototype.character = "~";
 creatureTypes.register(DrunkBug);
 
-// Example 8.7
+	/// Example 8.7 ///
 function LichenEater() {
   	this.energy = 10;
 }
@@ -425,7 +425,7 @@ LichenEater.prototype.character = "c";
 creatureTypes.register(LichenEater);
 
 
-// Example 8.8
+	/// Example 8.8 ///
 function CleverLichenEater() {
   	this.energy = 10;
 }
@@ -449,7 +449,7 @@ CleverLichenEater.prototype.character = "c";
 
 creatureTypes.register(CleverLichenEater);
 
-// Example 8.9
+	/// Example 8.9 ///
 function LichenEaterEater() {
   this.energy = 30;
   this.direction = "sw";
@@ -479,5 +479,50 @@ LichenEaterEater.prototype.act = function(surroundings) {
 LichenEaterEater.prototype.character = "@";
 creatureTypes.register(LichenEaterEater);
 
-// Example 10.1
+	/// Example 10.1 ///
 var dateRegExpr = /\d\d\/\d\d\/\d\d\d\d/;
+
+	/// Example 10.2 ///
+var emailRegExp = /\b[\w\-]+@+[\w\-]+\.\w{2,3}\b/;
+
+/// Regular Expression Cheat Sheet ///
+/ /  = initiate regular expression
+[  ] = any of these characters
+(^)  = matches the start of the string
+($)  = matches the end of the string
+(.)  = any character that is not a newline
+(\d) = any digit
+(\w) = any alphanumeric character (including underscores, for some reason)
+(\s) = any white-space (tab, newline, space) character.
+(\b) = word boundary
+
+
+/// Placed after an element ///
+{ }  = gives the exact amount of times it must occur. 
+{ , }= the pattern must occur => the first number, & <= the second one
+(*)  = allows it to be repeated any number of times
+(+)  = requires the pattern to occur at least one time
+(?)  = makes an element optional [it can occur zero or one times]
+.test = true if the given string === the expression.
+
+/// Placed after expression (OPTIONS) ///
+i = expression is case-insensitive
+| = allow a pattern to make a choice between two elements
+
+	/// Example 10.3 ///
+function extractDate(p) {
+	var found = p.match(/(\d\d?)\/(\d\d?)\/(\d{4})/);
+	if (found == null)
+		throw new Error("No date found in '" + p + "'.");
+	return new Date(Number(found[3]), Number(found[2]) - 1,
+              		Number(found[1]));
+}
+
+	/// Example 10.4 ///
+function escapeHTML(text) {
+  var replacements = {"<": "&lt;", ">": "&gt;",
+                      "&": "&amp;", "\"": "&quot;"};
+  return text.replace(/[<>&"]/g, function(character) {
+    return replacements[character];
+  });
+}
