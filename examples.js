@@ -581,3 +581,128 @@ function makeTable(data, columns) {
   	});
   	return dom("TABLE", null, body);
 }
+
+	/// Example 13.1 ///
+function registerEventHandler(node, event, func){
+	if(typeof node.addEventListener == "function"){
+		return node.addEventListener(event, func, false);
+	}
+	else{
+		return node.attachEvent("on"+event, func);
+	}
+}
+
+	/// Example 13.2 ///
+Square.moveContent = function(target) {
+  target.content = this.content;
+  this.content = null;
+  target.tableCell.appendChild(this.tableCell.lastChild);
+};
+Square.clearContent = function() {
+  this.content = null;
+  removeElement(this.tableCell.lastChild);
+};
+
+	/// Example 13.3 ///
+SokobanField.move = function(direction) {
+  var playerSquare = this.getSquare(this.playerPos);
+  var targetPos = this.playerPos.add(direction);
+  var targetSquare = this.getSquare(targetPos);
+
+  // Possibly pushing a boulder
+  if (targetSquare.hasBoulder()) {
+    var pushTarget = this.getSquare(targetPos.add(direction));
+    if (pushTarget.isEmpty()) {
+      targetSquare.moveContent(pushTarget);
+    }
+    else if (pushTarget.isExit()) {
+      targetSquare.moveContent(pushTarget);
+      pushTarget.clearContent();
+      this.bouldersToGo--;
+      this.updateScore();
+    }
+  }
+  // Moving the player
+  if (targetSquare.isEmpty()) {
+    playerSquare.moveContent(targetSquare);
+    this.playerPos = targetPos;
+  }
+};
+
+	/// Example 13.4 ///
+SokobanGame.keyDown = function(event) {
+  if (arrowKeyCodes.contains(event.keyCode)) {
+    event.stop();
+    this.field.move(arrowKeyCodes.lookup(event.keyCode));
+    if (this.field.won()) {
+      if (this.level < sokobanLevels.length - 1) {
+        alert("Excellent! Going to the next level.");
+        this.level++;
+        this.reset();
+      }
+      else {
+        alert("You win! Game over.");
+        this.newGame();
+      }
+    }
+  }
+};
+
+	/// Example 13.5 ///
+Square.clearContent = function() {
+  self.content = null;
+  var image = this.tableCell.lastChild;
+  var size = 100;
+
+  var animate = setInterval(function() {
+    size -= 10;
+    image.style.width = size + "%";
+    image.style.height = size + "%";
+
+    if (size < 60) {
+      clearInterval(animate);
+      removeElement(image);
+    }
+  }, 70);
+};
+
+  /// Example 14.1 ///
+function serializeJSON(value) {
+  function isArray(value) {
+    return /^\s*function Array/.test(String(value.constructor));
+  }
+
+  function serializeArray(value) {
+    return "[" + map(serializeJSON, value).join(", ") + "]";
+  }
+  function serializeObject(value) {
+    var properties = [];
+    forEachIn(value, function(name, value) {
+        properties.push(serializeString(name) + ": " +
+                      serializeJSON(value));
+    });
+    return "{" + properties.join(", ") + "}";
+  }
+  function serializeString(value) {
+    var special =
+      {"\"": "\\\"", "\\": "\\\\", "\f": "\\f", "\b": "\\b",
+       "\n": "\\n", "\t": "\\t", "\r": "\\r", "\v": "\\v"};
+    var escaped = value.replace(/[\"\\\f\b\n\t\r\v]/g,
+                                function(c) {return special[c];});
+    return "\"" + escaped + "\"";
+  }
+
+  var type = typeof value;
+  if (type == "object" && isArray(value)){
+    return serializeArray(value);
+  }
+  else if (type == "object"){
+    return serializeObject(value);
+  }
+  else if (type == "string"){
+    return serializeString(value);
+  }
+  else{
+    return String(value);
+  }
+}
